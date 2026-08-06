@@ -7,10 +7,10 @@ secara periodik, simpan histori-nya, dan tampilkan lewat dashboard.
 ## Arsitektur
 
 ```
-SniffingWorker (Windows Service)  --EXEC-->  SQL Server (IP_SNIFFING_CAPTURE)
+SniffingWorker (Windows Service)  --EXEC-->  SQL Server (stored procedure capture)
                                                       |
                                                       v
-                                                 SNIFFINGLOG (partitioned per bulan)
+                                              tabel log (partitioned per bulan)
                                                       ^
                                                       |
 SniffingDashboard (Angular)  --HTTPS-->  SniffingApi (Web API)  --EXEC-->  SQL Server
@@ -20,7 +20,7 @@ Tiga komponen independen, masing-masing bisa di-deploy terpisah:
 
 | Project | Peran |
 |---|---|
-| `SniffingWorker` | Windows Service — jalan sesuai jadwal cron, `EXEC IP_SNIFFING_CAPTURE` buat snapshot query stats ke tabel `SNIFFINGLOG` |
+| `SniffingWorker` | Windows Service — jalan sesuai jadwal cron, EXEC stored procedure buat snapshot query stats ke tabel log |
 | `SniffingApi` | Web API — nyuplai data ke dashboard (grid, top offenders) dan aksi recompile SP |
 | `SniffingDashboard` | Angular SPA — dashboard buat lihat & analisa hasil capture |
 
@@ -49,10 +49,8 @@ Tiga komponen independen, masing-masing bisa di-deploy terpisah:
 - HTTP Interceptor — nempelin API key otomatis ke tiap request
 
 **Database**
-- SQL Server — tabel `SNIFFINGLOG` di-partition per bulan (clustered index `(CapturedAt, Id)`)
-- 4 stored procedure: `IP_SNIFFING_CAPTURE`, `IP_SNIFFING_LOG_GET`,
-  `IP_SNIFFING_TOP_OFFENDER_GET`, `IP_SNIFFING_RECOMPILE` — semua query dieksekusi
-  lewat SP, nggak ada inline SQL
+- SQL Server — tabel log di-partition per bulan (clustered index gabungan kolom waktu + id)
+- Semua query dieksekusi lewat stored procedure — nggak ada inline SQL di kode aplikasi
 
 ## Struktur Project
 
