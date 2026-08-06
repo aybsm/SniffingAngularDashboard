@@ -1,0 +1,101 @@
+<div class="dashboard">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <div class="dashboard__kpi-row">
+    <div class="kpi-card kpi-card--orange">
+      <mat-icon>storage</mat-icon>
+      <div class="kpi-card__body">
+        <span class="kpi-card__value">{{ monitoredCount() }}</span>
+        <span class="kpi-card__label">SP Terpantau</span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-card--red">
+      <mat-icon>warning</mat-icon>
+      <div class="kpi-card__body">
+        <span class="kpi-card__value">{{ flaggedCount() }}</span>
+        <span class="kpi-card__label">SP Flagged</span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-card--green">
+      <mat-icon>percent</mat-icon>
+      <div class="kpi-card__body">
+        <span class="kpi-card__value">{{ avgVariancePerc() | percent: '1.0-1' }}</span>
+        <span class="kpi-card__label">Rata-rata Variance</span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-card--cyan">
+      <mat-icon>bolt</mat-icon>
+      <div class="kpi-card__body">
+        <span class="kpi-card__value">{{ totalExecutions() | number }}</span>
+        <span class="kpi-card__label">Total Eksekusi</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard__chart-card">
+    <h2>Top 10 SP by Read Variance %</h2>
+    <p class="dashboard__chart-subtitle">Snapshot terakhir per procedure, 24 jam terakhir</p>
+    <apx-chart
+      [series]="chartSeries()"
+      [chart]="chart"
+      [xaxis]="xaxis"
+      [plotOptions]="plotOptions"
+      [dataLabels]="dataLabels"
+      [colors]="colors"
+    />
+  </div>
+
+  <div class="dashboard__panel">
+    <div class="dashboard__panel-header">
+      <h2>Top Offenders</h2>
+      <span>Kandidat parameter sniffing / stale statistics</span>
+    </div>
+
+    <table mat-table [dataSource]="topOffenders()">
+      <ng-container matColumnDef="procedureName">
+        <th mat-header-cell *matHeaderCellDef>Procedure</th>
+        <td mat-cell *matCellDef="let row">{{ row.procedureName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="schemaName">
+        <th mat-header-cell *matHeaderCellDef>Schema</th>
+        <td mat-cell *matCellDef="let row">{{ row.schemaName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="executionCount">
+        <th mat-header-cell *matHeaderCellDef>Exec Count</th>
+        <td mat-cell *matCellDef="let row">{{ row.executionCount | number }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="readVariancePerc">
+        <th mat-header-cell *matHeaderCellDef>Variance %</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.readVariancePerc !== null ? (row.readVariancePerc | percent: '1.0-1') : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Aksi</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="openRecompile(row)" matTooltip="Recompile">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="dashboard__empty" [attr.colspan]="displayedColumns.length">
+          Tidak ada data.
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

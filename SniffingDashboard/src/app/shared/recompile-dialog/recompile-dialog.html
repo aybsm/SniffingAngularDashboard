@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Recompile Stored Procedure</h2>
+
+<mat-dialog-content>
+  <p>
+    Kamu akan menjalankan <code>sp_recompile</code> untuk
+    <strong>{{ data.procedureName }}</strong>. Masukkan kode verifikasi 6 digit dari
+    Google Authenticator untuk melanjutkan.
+  </p>
+
+  <mat-form-field appearance="outline" class="recompile-dialog__field">
+    <mat-label>Kode verifikasi</mat-label>
+    <input
+      matInput
+      inputmode="numeric"
+      maxlength="6"
+      [(ngModel)]="totpCode"
+      (keydown.enter)="confirm()"
+      placeholder="123456"
+      autofocus
+    />
+  </mat-form-field>
+
+  @if (errorMessage()) {
+    <p class="recompile-dialog__error">
+      <mat-icon>error_outline</mat-icon>
+      {{ errorMessage() }}
+    </p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="submitting()">Batal</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="confirm()"
+    [disabled]="totpCode().length !== 6 || submitting()"
+  >
+    @if (submitting()) {
+      <mat-progress-spinner diameter="18" mode="indeterminate" />
+    } @else {
+      Recompile
+    }
+  </button>
+</mat-dialog-actions>

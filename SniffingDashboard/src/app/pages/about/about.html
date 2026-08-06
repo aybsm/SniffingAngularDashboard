@@ -1,0 +1,73 @@
+<div class="about">
+  <!-- Profile -->
+  <mat-card class="profile-card">
+    <div class="profile-card__avatar">{{ profile.initials }}</div>
+
+    <div class="profile-card__info">
+      <h1>{{ profile.name }}</h1>
+      <p class="profile-card__role">{{ profile.role }}</p>
+      <p class="profile-card__bio">{{ profile.bio }}</p>
+
+      <div class="profile-card__links">
+        <a mat-stroked-button [href]="'mailto:' + profile.email">
+          <mat-icon>mail</mat-icon>
+          Email
+        </a>
+        <a mat-stroked-button [href]="profile.github" target="_blank" rel="noopener">
+          <mat-icon>code</mat-icon>
+          GitHub
+        </a>
+        <a mat-stroked-button [href]="profile.linkedin" target="_blank" rel="noopener">
+          <mat-icon>business_center</mat-icon>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Tech stack -->
+  <mat-card class="tech-card">
+    <h2>Teknologi yang Dipakai</h2>
+    <div class="tech-card__groups">
+      @for (group of techGroups; track group.category) {
+        <div class="tech-group">
+          <span class="tech-group__label">{{ group.category }}</span>
+          <mat-chip-set>
+            @for (item of group.items; track item) {
+              <mat-chip>{{ item }}</mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      }
+    </div>
+  </mat-card>
+
+  <!-- AI collaboration -->
+  <mat-card class="ai-card">
+    <div class="ai-card__header">
+      <div class="ai-card__badge">
+        <mat-icon>auto_awesome</mat-icon>
+      </div>
+      <div>
+        <h2>Dibangun Bersama Claude</h2>
+        <p class="ai-card__subtitle">AI Assistant dari Anthropic</p>
+      </div>
+    </div>
+
+    <p class="ai-card__text">
+      Seluruh sistem di dashboard ini — worker service, API, skema database, sampai
+      halaman ini sendiri — dikerjakan lewat kolaborasi dengan <strong>Claude</strong>.
+      Peran saya sebagai <em>Software Architect</em>: menentukan arsitektur, mereview
+      setiap keputusan teknis, dan mengarahkan lewat diskusi — mulai dari desain
+      partisi tabel, strategi retry, sampai keputusan keamanan API. Claude berperan
+      sebagai <em>developer</em> yang mengeksekusi, menjelaskan trade-off, dan
+      mengimplementasikan hasil diskusi jadi kode nyata.
+    </p>
+
+    <p class="ai-card__text">
+      Bukan sekadar "generate lalu terima" — tiap keputusan (pattern retry, desain
+      index, cara autentikasi, sampai penamaan kolom) didiskusikan dan divalidasi
+      dulu sebelum dieksekusi.
+    </p>
+  </mat-card>
+</div>

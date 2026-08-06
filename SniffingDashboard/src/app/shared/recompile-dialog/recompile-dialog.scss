@@ -1,0 +1,12 @@
+.recompile-dialog__field {
+  width: 100%;
+}
+
+.recompile-dialog__error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e53935;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
