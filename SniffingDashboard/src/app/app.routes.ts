@@ -14,5 +14,10 @@ export const routes: Routes = [
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
   },
+  {
+    path: 'unavailable',
+    loadComponent: () =>
+      import('./pages/api-unavailable/api-unavailable').then((m) => m.ApiUnavailable),
+  },
   { path: '**', redirectTo: 'dashboard' },
 ];

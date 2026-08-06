@@ -1,0 +1,52 @@
+.unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 1rem;
+}
+
+.unavailable__card {
+  max-width: 480px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-radius: 16px;
+}
+
+.unavailable__icon {
+  font-size: 3.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: #e53935;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+}
+
+p {
+  margin: 0 0 0.75rem;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+}
+
+.unavailable__contact-hint {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.unavailable__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+}

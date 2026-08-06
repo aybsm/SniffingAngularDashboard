@@ -5,13 +5,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { apiErrorInterceptor } from './core/api-error.interceptor';
 import { apiKeyInterceptor } from './core/api-key.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([apiKeyInterceptor])),
+    provideHttpClient(withInterceptors([apiKeyInterceptor, apiErrorInterceptor])),
     provideAnimationsAsync(),
     provideNativeDateAdapter()
   ]
