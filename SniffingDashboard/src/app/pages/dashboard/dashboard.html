@@ -59,7 +59,7 @@
     <table mat-table [dataSource]="topOffenders()">
       <ng-container matColumnDef="procedureName">
         <th mat-header-cell *matHeaderCellDef>Procedure</th>
-        <td mat-cell *matCellDef="let row">{{ row.procedureName }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.procedureName | maskSpName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="schemaName">

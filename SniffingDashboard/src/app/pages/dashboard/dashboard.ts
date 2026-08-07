@@ -9,7 +9,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexPlotOptions, ApexDataLabels } from 'ng-apexcharts';
 import { SniffingApi } from '../../core/sniffing-api';
+import { maskSpName } from '../../core/mask-sp-name';
 import { TopOffenderDto } from '../../core/models';
+import { MaskSpNamePipe } from '../../shared/mask-sp-name.pipe';
 import {
   RecompileDialog,
   RecompileDialogResult,
@@ -29,6 +31,7 @@ const FLAGGED_THRESHOLD = 0.5;
     MatSnackBarModule,
     MatTooltipModule,
     NgApexchartsModule,
+    MaskSpNamePipe,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
@@ -69,7 +72,7 @@ export class Dashboard {
     },
   ]);
   protected readonly chartCategories = computed(() =>
-    this.topOffenders().map((o) => o.procedureName)
+    this.topOffenders().map((o) => maskSpName(o.procedureName))
   );
 
   protected readonly chart: ApexChart = { type: 'bar', height: 320, toolbar: { show: false } };
