@@ -53,6 +53,20 @@ export interface TopOffenderDto {
   avgReadsPerc: number | null;
 }
 
+export interface TrendQuery {
+  metric?: TopOffenderMetric;
+  top?: number;
+  dateFrom?: string;
+  dateTo?: string;
+}
+
+export interface TrendPoint {
+  procedureID: number;
+  procedureName: string;
+  capturedAt: string;
+  metricValue: number | null;
+}
+
 export interface RecompileResult {
   procedureName: string;
   message: string;

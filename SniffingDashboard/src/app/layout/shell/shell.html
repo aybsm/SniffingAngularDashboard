@@ -35,6 +35,17 @@
       <span>Sniffing Worker Dashboard</span>
     </mat-toolbar>
 
+    @if (isDemoMode) {
+      <div class="shell__demo-banner">
+        <mat-icon>info</mat-icon>
+        <span>
+          Ini <strong>data dummy</strong> buat demo. Untuk data real, clone
+          <a href="https://github.com/aybsm/SniffingAngularDashboard" target="_blank" rel="noopener">repo ini</a>
+          dan jalankan sendiri dengan API asli.
+        </span>
+      </div>
+    }
+
     <main class="shell__content">
       <router-outlet />
     </main>

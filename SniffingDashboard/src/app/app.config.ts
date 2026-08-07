@@ -4,9 +4,12 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, withHashLocation } from '@angular/router';
 
+import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { apiErrorInterceptor } from './core/api-error.interceptor';
 import { apiKeyInterceptor } from './core/api-key.interceptor';
+import { DemoSniffingApi } from './core/demo-sniffing-api';
+import { SniffingApi } from './core/sniffing-api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withHashLocation()),
     provideHttpClient(withInterceptors([apiKeyInterceptor, apiErrorInterceptor])),
     provideAnimationsAsync(),
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    { provide: SniffingApi, useClass: environment.demoMode ? DemoSniffingApi : SniffingApi }
   ]
 };

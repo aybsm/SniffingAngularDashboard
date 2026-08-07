@@ -7,10 +7,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexPlotOptions, ApexDataLabels } from 'ng-apexcharts';
+import {
+  NgApexchartsModule,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexPlotOptions,
+  ApexDataLabels,
+  ApexStroke,
+  ApexLegend,
+} from 'ng-apexcharts';
 import { SniffingApi } from '../../core/sniffing-api';
 import { maskSpName } from '../../core/mask-sp-name';
-import { TopOffenderDto } from '../../core/models';
+import { TopOffenderDto, TrendPoint } from '../../core/models';
 import { MaskSpNamePipe } from '../../shared/mask-sp-name.pipe';
 import {
   RecompileDialog,
@@ -42,7 +51,9 @@ export class Dashboard {
   private readonly snackBar = inject(MatSnackBar);
 
   protected readonly loading = signal(false);
+  protected readonly trendLoading = signal(false);
   protected readonly topOffenders = signal<TopOffenderDto[]>([]);
+  protected readonly trendPoints = signal<TrendPoint[]>([]);
   protected readonly displayedColumns = [
     'procedureName',
     'executionCount',
@@ -85,8 +96,38 @@ export class Dashboard {
     return { categories: this.chartCategories() };
   }
 
+  // ---- Trend chart (spline, multi-line per procedure) ----
+  protected readonly trendSeries = computed<ApexAxisChartSeries>(() => {
+    const grouped = new Map<number, { name: string; data: [number, number | null][] }>();
+
+    for (const p of this.trendPoints()) {
+      if (!grouped.has(p.procedureID)) {
+        grouped.set(p.procedureID, { name: maskSpName(p.procedureName), data: [] });
+      }
+      const value = p.metricValue !== null ? Math.round(p.metricValue * 1000) / 10 : null;
+      grouped.get(p.procedureID)!.data.push([new Date(p.capturedAt).getTime(), value]);
+    }
+
+    return Array.from(grouped.values());
+  });
+
+  protected readonly trendChart: ApexChart = {
+    type: 'line',
+    height: 320,
+    toolbar: { show: false },
+    zoom: { enabled: false },
+  };
+  protected readonly trendXaxis: ApexXAxis = {
+    type: 'datetime',
+    labels: { datetimeUTC: false },
+  };
+  protected readonly trendStroke: ApexStroke = { curve: 'smooth', width: 2 };
+  protected readonly trendDataLabels: ApexDataLabels = { enabled: false };
+  protected readonly trendLegend: ApexLegend = { position: 'bottom' };
+
   constructor() {
     this.load();
+    this.loadTrend();
   }
 
   load(): void {
@@ -99,6 +140,20 @@ export class Dashboard {
       error: () => {
         this.loading.set(false);
         this.snackBar.open('Gagal memuat top offenders.', 'Tutup', { duration: 4000 });
+      },
+    });
+  }
+
+  loadTrend(): void {
+    this.trendLoading.set(true);
+    this.api.getTrend({ metric: 'ReadVariancePerc', top: 5 }).subscribe({
+      next: (data) => {
+        this.trendPoints.set(data);
+        this.trendLoading.set(false);
+      },
+      error: () => {
+        this.trendLoading.set(false);
+        this.snackBar.open('Gagal memuat trend chart.', 'Tutup', { duration: 4000 });
       },
     });
   }

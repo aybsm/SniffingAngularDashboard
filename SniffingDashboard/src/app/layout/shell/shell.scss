@@ -57,6 +57,30 @@ mat-nav-list a {
   font-weight: 600;
 }
 
+.shell__demo-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.5rem;
+  background: #fff3cd;
+  color: #7a5c00;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  mat-icon {
+    flex: none;
+    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  a {
+    color: #7a5c00;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
 .shell__content {
   padding: 1.5rem;
   background: #f4f6fb;

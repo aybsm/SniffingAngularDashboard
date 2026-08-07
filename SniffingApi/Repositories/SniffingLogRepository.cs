@@ -80,6 +80,27 @@ namespace SniffingApi.Repositories
                 "IP_SNIFFING_TOP_OFFENDER_GET", parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<TrendPointDto>> GetTrendAsync(TrendQuery query)
+        {
+            var top = Math.Clamp(query.Top, 1, 20);
+            var dateTo = query.DateTo ?? DateTime.Now;
+            var dateFrom = query.DateFrom ?? dateTo.AddHours(-24);
+            var bucketMinutes = Math.Clamp(query.BucketMinutes, 1, 1440);
+
+            var parameters = new
+            {
+                Metric = query.Metric.ToString(),
+                Top = top,
+                DateFrom = dateFrom,
+                DateTo = dateTo,
+                BucketMinutes = bucketMinutes
+            };
+
+            using IDbConnection connection = _connectionFactory.CreateConnection();
+            return await connection.QueryAsync<TrendPointDto>(
+                "IP_SNIFFING_TREND_GET", parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<string> RecompileAsync(int procedureId)
         {
             using IDbConnection connection = _connectionFactory.CreateConnection();

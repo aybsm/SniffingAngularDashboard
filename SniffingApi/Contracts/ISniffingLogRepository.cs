@@ -8,6 +8,7 @@ namespace SniffingApi.Contracts
     {
         Task<SniffingLogGridResult> GetGridAsync(SniffingLogGridQuery query);
         Task<IEnumerable<TopOffenderDto>> GetTopOffendersAsync(TopOffendersQuery query);
+        Task<IEnumerable<TrendPointDto>> GetTrendAsync(TrendQuery query);
 
         /// <summary>Resolve ProcedureID lalu EXEC sp_recompile. Balikin null kalau object nggak ditemukan.</summary>
         Task<string> RecompileAsync(int procedureId);

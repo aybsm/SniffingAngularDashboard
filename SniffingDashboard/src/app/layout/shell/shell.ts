@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { map } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-shell',
@@ -26,6 +27,8 @@ import { map } from 'rxjs';
 })
 export class Shell {
   private readonly breakpointObserver = inject(BreakpointObserver);
+
+  protected readonly isDemoMode = environment.demoMode;
 
   protected readonly isMobile = toSignal(
     this.breakpointObserver.observe(Breakpoints.Handset).pipe(map((result) => result.matches)),

@@ -8,14 +8,16 @@ import {
   SniffingLogGridResult,
   TopOffenderDto,
   TopOffendersQuery,
+  TrendPoint,
+  TrendQuery,
 } from './models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SniffingApi {
-  private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.apiBaseUrl}/api/sniffinglog`;
+  protected readonly http = inject(HttpClient);
+  protected readonly baseUrl = `${environment.apiBaseUrl}/api/sniffinglog`;
 
   getGrid(query: SniffingLogGridQuery): Observable<SniffingLogGridResult> {
     let params = new HttpParams()
@@ -41,6 +43,17 @@ export class SniffingApi {
     if (query.minExecutionCount !== undefined) params = params.set('minExecutionCount', query.minExecutionCount);
 
     return this.http.get<TopOffenderDto[]>(`${this.baseUrl}/top-offenders`, { params });
+  }
+
+  getTrend(query: TrendQuery): Observable<TrendPoint[]> {
+    let params = new HttpParams();
+
+    if (query.metric) params = params.set('metric', query.metric);
+    if (query.top !== undefined) params = params.set('top', query.top);
+    if (query.dateFrom) params = params.set('dateFrom', query.dateFrom);
+    if (query.dateTo) params = params.set('dateTo', query.dateTo);
+
+    return this.http.get<TrendPoint[]>(`${this.baseUrl}/trend`, { params });
   }
 
   recompile(procedureId: number, totpCode: string): Observable<RecompileResult> {

@@ -29,6 +29,10 @@ namespace SniffingApi.Controllers
         public async Task<ActionResult> GetTopOffenders([FromQuery] TopOffendersQuery query)
             => Ok(await _repository.GetTopOffendersAsync(query));
 
+        [HttpGet("trend")]
+        public async Task<ActionResult> GetTrend([FromQuery] TrendQuery query)
+            => Ok(await _repository.GetTrendAsync(query));
+
         [HttpPost("{procedureId:int}/recompile")]
         public async Task<ActionResult> Recompile(int procedureId, [FromQuery] string totpCode)
         {
