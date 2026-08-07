@@ -45,7 +45,6 @@ export class Dashboard {
   protected readonly topOffenders = signal<TopOffenderDto[]>([]);
   protected readonly displayedColumns = [
     'procedureName',
-    'schemaName',
     'executionCount',
     'readVariancePerc',
     'actions',

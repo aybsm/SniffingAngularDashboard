@@ -62,11 +62,6 @@
         <td mat-cell *matCellDef="let row">{{ row.procedureName | maskSpName }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="schemaName">
-        <th mat-header-cell *matHeaderCellDef>Schema</th>
-        <td mat-cell *matCellDef="let row">{{ row.schemaName }}</td>
-      </ng-container>
-
       <ng-container matColumnDef="executionCount">
         <th mat-header-cell *matHeaderCellDef>Exec Count</th>
         <td mat-cell *matCellDef="let row">{{ row.executionCount | number }}</td>
