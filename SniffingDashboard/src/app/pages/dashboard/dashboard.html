@@ -37,35 +37,37 @@
     </div>
   </div>
 
-  <div class="dashboard__chart-card">
-    <h2>Top 10 SP by Read Variance %</h2>
-    <p class="dashboard__chart-subtitle">Snapshot terakhir per procedure, 24 jam terakhir</p>
-    <apx-chart
-      [series]="chartSeries()"
-      [chart]="chart"
-      [xaxis]="xaxis"
-      [plotOptions]="plotOptions"
-      [dataLabels]="dataLabels"
-      [colors]="colors"
-    />
-  </div>
+  <div class="dashboard__charts-row">
+    <div class="dashboard__chart-card">
+      <h2>Top 10 SP by Read Variance %</h2>
+      <p class="dashboard__chart-subtitle">Snapshot terakhir per procedure, 24 jam terakhir</p>
+      <apx-chart
+        [series]="chartSeries()"
+        [chart]="chart"
+        [xaxis]="xaxis"
+        [plotOptions]="plotOptions"
+        [dataLabels]="dataLabels"
+        [colors]="colors"
+      />
+    </div>
 
-  <div class="dashboard__chart-card">
-    <h2>Trend Read Variance % (Top 5 SP)</h2>
-    <p class="dashboard__chart-subtitle">
-      Histori per capture, 24 jam terakhir - garis turun setelah recompile = perbaikan berhasil
-    </p>
-    @if (trendLoading()) {
-      <mat-progress-bar mode="indeterminate" />
-    }
-    <apx-chart
-      [series]="trendSeries()"
-      [chart]="trendChart"
-      [xaxis]="trendXaxis"
-      [stroke]="trendStroke"
-      [dataLabels]="trendDataLabels"
-      [legend]="trendLegend"
-    />
+    <div class="dashboard__chart-card">
+      <h2>Trend Read Variance % (Top 5 SP)</h2>
+      <p class="dashboard__chart-subtitle">
+        Histori per capture, 24 jam terakhir - garis turun setelah recompile = perbaikan berhasil
+      </p>
+      @if (trendLoading()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <apx-chart
+        [series]="trendSeries()"
+        [chart]="trendChart"
+        [xaxis]="trendXaxis"
+        [stroke]="trendStroke"
+        [dataLabels]="trendDataLabels"
+        [legend]="trendLegend"
+      />
+    </div>
   </div>
 
   <div class="dashboard__panel">
