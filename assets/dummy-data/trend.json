@@ -7,7 +7,7 @@
   {"procedureID":7,"procedureName":"IP_GET_7","capturedAt":"2026-08-07T09:45:00","metricValue":0.99},
   {"procedureID":7,"procedureName":"IP_GET_7","capturedAt":"2026-08-07T10:00:00","metricValue":0.96},
   {"procedureID":7,"procedureName":"IP_GET_7","capturedAt":"2026-08-07T10:15:00","metricValue":0.98},
-  {"procedureID":7,"procedureName":"IP_GET_7","capturedAt":"2026-08-07T10:30:00","metricValue":1.0},
+  {"procedureID":7,"procedureName":"IP_GET_7","capturedAt":"2026-08-07T10:30:00","metricValue":0.96},
 
   {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T08:30:00","metricValue":0.28},
   {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T08:45:00","metricValue":0.35},
@@ -17,7 +17,7 @@
   {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T09:45:00","metricValue":0.70},
   {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T10:00:00","metricValue":0.81},
   {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T10:15:00","metricValue":0.90},
-  {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T10:30:00","metricValue":1.0},
+  {"procedureID":13,"procedureName":"IP_GET_13","capturedAt":"2026-08-07T10:30:00","metricValue":0.91},
 
   {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T08:30:00","metricValue":0.92},
   {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T08:45:00","metricValue":0.94},
@@ -27,7 +27,7 @@
   {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T09:45:00","metricValue":0.45},
   {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T10:00:00","metricValue":0.68},
   {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T10:15:00","metricValue":0.85},
-  {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T10:30:00","metricValue":1.0},
+  {"procedureID":14,"procedureName":"IP_GET_14","capturedAt":"2026-08-07T10:30:00","metricValue":0.87},
 
   {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T08:30:00","metricValue":0.45},
   {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T08:45:00","metricValue":0.72},
@@ -37,7 +37,7 @@
   {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T09:45:00","metricValue":0.80},
   {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T10:00:00","metricValue":0.42},
   {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T10:15:00","metricValue":0.60},
-  {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T10:30:00","metricValue":1.0},
+  {"procedureID":16,"procedureName":"IP_GET_16","capturedAt":"2026-08-07T10:30:00","metricValue":0.72},
 
   {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T08:30:00","metricValue":0.10},
   {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T08:45:00","metricValue":0.12},
@@ -47,5 +47,5 @@
   {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T09:45:00","metricValue":0.22},
   {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T10:00:00","metricValue":0.35},
   {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T10:15:00","metricValue":0.60},
-  {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T10:30:00","metricValue":1.0}
+  {"procedureID":18,"procedureName":"IP_GET_18","capturedAt":"2026-08-07T10:30:00","metricValue":0.66}
 ]
